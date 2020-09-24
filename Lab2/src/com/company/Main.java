@@ -5,44 +5,39 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        /*Scanner scanner = new Scanner(System.in);
-        int finish = Integer.parseInt(scanner.nextLine());*/
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Student Surname: ");
+        String Surname = scanner.nextLine();
+        System.out.print("Student Name: ");
+        String Name = scanner.nextLine();
+        System.out.print("Student BirthDate (example: 08.03.2000): ");
+        String BirthDate = scanner.nextLine();
+        System.out.print("Student Telephone (example: +38(099)555-5555): ");
+        String Telephone = scanner.nextLine();
+        System.out.print("Student HomeAddress: ");
+        String HomeAddress = scanner.nextLine();
 
-        Student Vasya = new Student();
-        Vasya.Input("123456789-12345", "1", "2", "3", "4");
+        Student NewStudent = new Student();
+        boolean AllTrue = true;
+        do {
+            int[] ErrorInput = NewStudent.Input(Surname, Name, BirthDate, Telephone, HomeAddress);
+            System.out.println(ErrorInput[0] + " " + ErrorInput[1]);
+            AllTrue = true;
+            if(ErrorInput[0] == 1) {
+                AllTrue = false;
+                System.out.println("Wrong date syntax. Please try again and follow the example.");
+                System.out.print("Student BirthDate (example: 08.03.2000): ");
+                BirthDate = scanner.nextLine();
+            }
+            if(ErrorInput[1] == 1) {
+                AllTrue = false;
+                System.out.println("Wrong phone number. Please try again and follow the example.");
+                System.out.print("Student Telephone (example: +38(099)555-5555): ");
+                Telephone = scanner.nextLine();
+            }
+        } while(!AllTrue);
 
-        System.out.println(Vasya.getSurname() + " " + Vasya.getName() + " " + Vasya.getBirthDate() + " " + Vasya.getTelephone() + " " + Vasya.getHomeAddress());
+        System.out.println(NewStudent.getSurname() + " " + NewStudent.getName() + " " + NewStudent.getBirthDate() + " " + NewStudent.getTelephone() + " " + NewStudent.getHomeAddress());
     }
 }
 
-class Student {
-    private String Surname;
-    private String Name;
-    private String BirthDate;
-    private String Telephone;
-    private String HomeAddress;
-
-    public void Input(String Surname, String Name, String BirthDate, String Telephone, String HomeAddress) {
-        this.Surname = Surname;
-        this.Name = Name;
-        this.BirthDate = BirthDate;
-        this.Telephone = Telephone;
-        this.HomeAddress = HomeAddress;
-    }
-
-    public String getSurname() {
-        return this.Surname;
-    }
-    public String getName() {
-        return this.Name;
-    }
-    public String getBirthDate() {
-        return this.BirthDate;
-    }
-    public String getTelephone() {
-        return this.Telephone;
-    }public String getHomeAddress() {
-        return this.HomeAddress;
-    }
-
-}
